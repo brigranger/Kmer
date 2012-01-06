@@ -1,0 +1,21 @@
+This code is meant to ease the processes involved in performing a k-mer analysis
+for use as a classification device to determine phylum of origin of a metagenomic
+sample. There are currently 4 pieces of code in this project.
+
+degenate.py - This code reads in a short nucleotide sequence and determines if 
+ there's degeneracy (i.e. B is "Not A") and returns the possible sequences of the 
+ given length that could have resulted in the degeneracy. Use for sequencing data
+
+Eukmer.py / kmer.py - The difference between these seems to be the input folder
+ which is read. Both of these read through a sequence file, and come up with a 
+ feature vector based on k-mer frequencies, using degenerate.py when appropriate
+ to determine fractional frequencies when the kmer contains degenerate nucleotide(s)
+
+seqselect.py - This code breaks up the "Euk" genome into 1000bp non-overlapping
+ segments as described in the paper this is based on, so this can be read by
+ Eukmer.py presumably to make the feature vectors.
+
+The resulting feature vector files can then be handled in a different software,
+in my case, I used matlab to produce Self Organizing Maps (or SOMs). With the 
+feature information, sequences with similar kmer frequencies will cluster together, 
+and are presumably from the same phylum.
